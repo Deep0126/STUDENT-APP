@@ -1,0 +1,18 @@
+{
+  "scripts": {
+    "server": "npm start --prefix SERVER",
+    "client": "npm start --prefix client",
+    "start": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.3",
+    "bootstrap": "^5.3.8",
+    "dotenv": "^17.4.2",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.4.1"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
