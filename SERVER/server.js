@@ -12,7 +12,8 @@ app.use(cors());
 app.use("/auth", authRoutes);
 
 
-mongoose.connect("mongodb://127.0.0.1:27017/studentDB")
+const MONGO_URI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/studentDB";
+mongoose.connect(MONGO_URI)
   .then(async () => {
     console.log("DB Connected");
     
@@ -99,11 +100,11 @@ app.post("/student/login", async (req, res) => {
 
 
 app.get("/students", verifyToken, async (req, res) => {
-  const data = await Student.find().select("-password");
+  const data = await Student.find().select("-password");//data fetch karva mate token
   res.send(data);
 });
 
-
+// new student update delete need token
 app.put("/students/:id", verifyToken, async (req, res) => {
   const data = await Student.findByIdAndUpdate(
     req.params.id,
@@ -132,7 +133,7 @@ const ExamSchema = new mongoose.Schema({
 
 const Exam = mongoose.model("Exam", ExamSchema);
 
-
+//exam form submit and read to need token
 app.post("/exams", verifyToken, async (req, res) => {
   try {
     const newDoc = { ...req.body, referenceId: "APP-" + Date.now() };

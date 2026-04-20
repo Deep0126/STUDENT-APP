@@ -29,7 +29,7 @@ function ExamManager({ activeStudent, onLogout }) {
       const config = {
         headers: { Authorization: `Bearer ${activeStudent.token}` }
       };
-      const res = await axios.post('http://localhost:5000/exams', formData, config);
+      const res = await axios.post('http://192.168.1.3:5000/exams', formData, config);
       setRefId(res.data.referenceId);
       setSubmitted(true);
     } catch (err) {

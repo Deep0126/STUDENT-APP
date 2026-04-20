@@ -10,7 +10,7 @@ function AdminLogin({ onLoginSuccess }) {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/auth/login', { email, password });
+      const res = await axios.post('http://192.168.1.3:5000/auth/login', { email, password });
       if (res.data.token) {
         onLoginSuccess(res.data.token);
       }

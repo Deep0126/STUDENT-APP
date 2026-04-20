@@ -46,11 +46,7 @@ function App() {
   };
 
   const switchCurrentView = (view) => {
-    // Agar view switch ho raha hai, toh puraane sessions clear kar dein
-    setAdminToken(null);
-    setActiveStudent(null);
-    setStudentAuthMode("login");
-    
+    // Agar view switch ho raha hai, toh session continue rakhne ke liye clear NAHI karenge
     setCurrentView(view);
   };
 
@@ -58,6 +54,7 @@ function App() {
     <div className="app-main-wrapper" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Navbar 
         theme={theme} 
+
         toggleTheme={toggleTheme} 
         onLogout={handleLogout} 
         activeStudent={activeStudent}

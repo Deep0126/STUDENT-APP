@@ -9,7 +9,7 @@ function StudentLogin({ onLoginSuccess, onGoBack }) {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/student/login', { email, password });
+      const res = await axios.post('http://192.168.1.3:5000/student/login', { email, password });
       onLoginSuccess(res.data);
     } catch (err) {
       setError(err.response?.data || "Login failed");

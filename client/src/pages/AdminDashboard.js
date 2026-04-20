@@ -15,8 +15,8 @@ function AdminDashboard({ token }) {
       const config = {
         headers: { Authorization: `Bearer ${token}` }
       };
-      const sRes = await axios.get('http://localhost:5000/students', config);
-      const eRes = await axios.get('http://localhost:5000/exams', config);
+      const sRes = await axios.get('http://192.168.1.3:5000/students', config);
+      const eRes = await axios.get('http://192.168.1.3:5000/exams', config);
       setStudents(sRes.data);
       setExams(eRes.data);
     } catch (err) {

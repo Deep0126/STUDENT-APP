@@ -20,18 +20,20 @@ function Navbar({
           </div>
 
           <div className="d-flex align-items-center gap-4">
-            <div className="nav-links d-none d-lg-flex gap-4 me-3">
+            <div className="nav-links d-flex gap-2 gap-lg-4 me-1 me-md-3">
               <button 
-                className={`btn btn-link text-decoration-none transition-all ${currentView === 'student' ? 'fw-bold border-bottom' : 'text-muted'}`}
+                className={`btn btn-link text-decoration-none transition-all p-0 ${currentView === 'student' ? 'fw-bold border-bottom' : 'text-muted'}`}
+                style={{ fontSize: '0.9rem' }}
                 onClick={() => setCurrentView('student')}
               >
-                Student Portal
+                Student
               </button>
               <button 
-                className={`btn btn-link text-decoration-none transition-all ${currentView === 'admin' ? 'fw-bold border-bottom' : 'text-muted'}`}
+                className={`btn btn-link text-decoration-none transition-all p-0 ${currentView === 'admin' ? 'fw-bold border-bottom' : 'text-muted'}`}
+                style={{ fontSize: '0.9rem' }}
                 onClick={() => setCurrentView('admin')}
               >
-                Admin Gateway
+                Admin
               </button>
             </div>
 

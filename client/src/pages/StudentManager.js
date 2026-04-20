@@ -16,7 +16,7 @@ function StudentManager({ onRegisterSuccess, onGoToLogin }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/students', formData);
+      const res = await axios.post('http://192.168.1.3:5000/students', formData);
       onRegisterSuccess(res.data);
     } catch (err) {
       setError(err.response?.data || "Registration failed");
