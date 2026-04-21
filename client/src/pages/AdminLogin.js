@@ -16,7 +16,12 @@ function AdminLogin({ onLoginSuccess }) {
       }
     } catch (err) {
       if (err.response) {
-        setError(err.response.data);
+        const errorData = err.response.data;
+        if (typeof errorData === 'string' && errorData.toLowerCase().includes('<html')) {
+          setError('Server error: The backend service is currently down or misconfigured (e.g., database not connected).');
+        } else {
+          setError(typeof errorData === 'string' ? errorData : 'An unexpected error occurred.');
+        }
       } else {
         setError('Login failed. Server might be down.');
       }

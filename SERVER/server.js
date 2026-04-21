@@ -80,7 +80,7 @@ app.post("/student/login", async (req, res) => {
     }
 
     let isMatch = false;
-    if (user.password && user.password.startsWith("$2a$")) {
+    if (user.password && user.password.startsWith("$2")) {
       isMatch = await bcrypt.compare(password, user.password); 
     } else {
       isMatch = (password === user.password);
