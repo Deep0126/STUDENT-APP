@@ -5,6 +5,7 @@ import StudentLogin from "./pages/StudentLogin";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import { useState, useEffect } from "react";
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 function App() {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
@@ -93,7 +94,7 @@ function App() {
         )}
       </main>
 
-
+      <SpeedInsights />
     </div>
   );
 }
