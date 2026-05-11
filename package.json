@@ -3,7 +3,7 @@
     "server": "npm start --prefix SERVER",
     "client": "npm start --prefix client",
     "start": "concurrently \"npm run server\" \"npm run client\"",
-    "vercel-build": "cd client && npm install && npm run build && cp -r build ../build"
+    "vercel-build": "npm --prefix client install && npm --prefix client run build && rm -rf build && mv client/build build"
   },
   "dependencies": {},
   "devDependencies": {
