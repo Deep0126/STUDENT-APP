@@ -13,7 +13,7 @@ app.use("/auth", authRoutes);
 
 
 const MONGO_URI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/studentDB";
-mongoose.connect(MONGO_URI)
+mongoose.connect(MONGO_URI, { tlsAllowInvalidCertificates: true })
   .then(async () => {
     console.log("DB Connected");
     
@@ -59,7 +59,13 @@ app.post("/students", async (req, res) => {
 
     const { password, ...rest } = req.body;
     
-    const data = new Student({ ...rest, password: password });
+    // Hash the password before saving
+    let hashedPassword = undefined;
+    if (password) {
+      hashedPassword = await bcrypt.hash(password, 10);
+    }
+    
+    const data = new Student({ ...rest, password: hashedPassword });
     await data.save();
     
     const token = require("jsonwebtoken").sign({ id: data._id, role: "student" }, process.env.JWT_SECRET);
