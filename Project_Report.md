@@ -15,7 +15,7 @@ The objective of this project is to build a robust, full-stack **Student Managem
 - **Security & Authentication:** JSON Web Tokens (JWT), bcryptjs (Password Hashing)
 - **Configuration Management:** dotenv (Secure `.env` environment variables)
 
-## 4. Project Structure
+## 4. Project Structure (Frontend & Backend)
 The application follows a standard MERN stack architecture, cleanly separating the frontend client from the backend API.
 
 ```text
@@ -56,11 +56,19 @@ To make the application globally accessible on the internet, it has been success
 2. **Backend API (Render):** The Node.js/Express server is published and hosted live on **Render**. It continuously runs on the internet and securely connects to the MongoDB Atlas cluster to process requests.
 3. **Frontend Application (Vercel):** The React.js frontend website is deployed on **Vercel**. It provides a fast, global CDN for the UI. Users can access the live website anytime at the public URL (`student-app-wheat-two.vercel.app`), which directly communicates with the live Render backend.
 
-## 8. System Stability & Maintenance
+## 8. Recently Added Admin Features
+To enhance the usability and data management capabilities of the Admin Control Center, the following features have been integrated directly into the Frontend (`AdminDashboard.js`) and supported by the Backend API:
+1. **Live Search & Filtering:** Admins can instantly search for students by Name, Course, or ID, and filter exam records.
+2. **Dashboard Statistics Cards:** Visual summary cards display the total number of registered students, total exams submitted, and a quick count of pending fees.
+3. **Data Export (CSV):** A one-click download button allows administrators to export the currently viewed (and filtered) data tables into a standard CSV format for offline reporting.
+4. **Admin Actions (Delete):** A streamlined interface allows admins to directly delete student records or exam submissions from the dashboard, communicating securely with the `DELETE` API endpoints.
+5. **Pagination:** Implemented frontend pagination to split large data tables into manageable pages, improving UI performance and readability.
+
+## 9. System Stability & Maintenance
 To ensure long-term reliability and stability in a production environment, several continuous improvements have been made:
 1. **Vercel Build Optimizations:** Resolved deployment pipeline failures by optimizing the Vercel build configuration. We bypassed unnecessary root-level installations and corrected dependency mismatches to enable a seamless production deployment process.
 2. **System Integrity Validations:** Conducted full system integrity checks to verify that both the frontend client and backend API are communicating correctly and securely, leaving the system fully operational and bug-free.
 3. **Database Connectivity:** Investigated and navigated common MongoDB Atlas connection issues (such as network-based certificate validation errors), ensuring the core application maintains a stable and secure connection via properly configured connection strings.
 
-## 9. Conclusion
+## 10. Conclusion
 The system successfully meets all requirements: it is dynamic, comfortably runs via local network or cloud deployments, securely manages passwords with bcrypt, strictly enforces API security with JWT, and effectively centralizes student data in a scalable cloud database.
