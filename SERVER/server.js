@@ -42,7 +42,7 @@ const StudentSchema = new mongoose.Schema({
   gender: String,
   address: String,
   pincode: String,
-  state: String,
+  state: String, 
   city: String,
   country: String
 });
