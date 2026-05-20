@@ -9,10 +9,13 @@ import { useState, useEffect } from "react";
 function App() {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   
-  const [activeStudent, setActiveStudent] = useState(null);
-  const [currentView, setCurrentView] = useState("student"); 
+  const [activeStudent, setActiveStudent] = useState(() => {
+    const saved = localStorage.getItem("activeStudent");
+    return saved ? JSON.parse(saved) : null;
+  });
+  const [currentView, setCurrentView] = useState(localStorage.getItem("currentView") || "student"); 
   const [studentAuthMode, setStudentAuthMode] = useState("login"); 
-  const [adminToken, setAdminToken] = useState(null);
+  const [adminToken, setAdminToken] = useState(localStorage.getItem("adminToken") || null);
 
   useEffect(() => {
     document.body.setAttribute('data-theme', theme);
@@ -25,29 +28,34 @@ function App() {
 
   const handleStudentRegistration = (studentData) => {
     setActiveStudent(studentData);
+    localStorage.setItem("activeStudent", JSON.stringify(studentData));
   };
 
   const handleStudentLogin = (studentData) => {
     setActiveStudent(studentData);
+    localStorage.setItem("activeStudent", JSON.stringify(studentData));
   };
 
   const handleLogout = () => {
     setActiveStudent(null);
+    localStorage.removeItem("activeStudent");
     setStudentAuthMode("login"); 
   };
 
   const handleAdminLogin = (token) => {
     setAdminToken(token);
+    localStorage.setItem("adminToken", token);
   };
 
   const handleAdminLogout = () => {
-
     setAdminToken(null);
+    localStorage.removeItem("adminToken");
   };
 
   const switchCurrentView = (view) => {
     // Agar view switch ho raha hai, toh session continue rakhne ke liye clear NAHI karenge
     setCurrentView(view);
+    localStorage.setItem("currentView", view);
   };
 
   return (
