@@ -7,11 +7,18 @@ function AdminDashboard({ token }) {
   const [activeTab, setActiveTab] = useState('students');
   
   const [searchQuery, setSearchQuery] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
 
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Reset pagination when tab or search query changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [activeTab, searchQuery]);
 
   const fetchData = async () => {
     try {
@@ -94,6 +101,8 @@ function AdminDashboard({ token }) {
   );
 
   const currentData = activeTab === 'students' ? filteredStudents : filteredExams;
+  const totalPages = Math.ceil(currentData.length / itemsPerPage) || 1;
+  const paginatedData = currentData.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   const pendingFeesCount = exams.filter(e => !e.feesPaid).length;
 
@@ -161,7 +170,7 @@ function AdminDashboard({ token }) {
                 </tr>
               </thead>
               <tbody>
-                {currentData.map(s => (
+                {paginatedData.map(s => (
                   <tr key={s._id}>
                     <td>{s.name}</td>
                     <td>{s.course}</td>
@@ -172,7 +181,7 @@ function AdminDashboard({ token }) {
                     </td>
                   </tr>
                 ))}
-                {currentData.length === 0 && (
+                {paginatedData.length === 0 && (
                   <tr><td colSpan="5" className="text-center text-muted py-3">No students found.</td></tr>
                 )}
             </tbody>
@@ -191,7 +200,7 @@ function AdminDashboard({ token }) {
               </tr>
             </thead>
             <tbody>
-              {currentData.map(e => (
+              {paginatedData.map(e => (
                 <tr key={e._id}>
                   <td>{e.name}</td>
                   <td>{e.enrollNo}</td>
@@ -204,13 +213,36 @@ function AdminDashboard({ token }) {
                   </td>
                 </tr>
               ))}
-              {currentData.length === 0 && (
+              {paginatedData.length === 0 && (
                 <tr><td colSpan="7" className="text-center text-muted py-3">No exams found.</td></tr>
               )}
             </tbody>
           </table>
         )}
       </div>
+      
+      {/* Pagination Controls */}
+      {totalPages > 1 && (
+        <div className="d-flex justify-content-between align-items-center glass-card p-3">
+          <button 
+            className="btn btn-sm btn-outline-secondary" 
+            disabled={currentPage === 1}
+            onClick={() => setCurrentPage(prev => prev - 1)}
+          >
+            &laquo; Previous
+          </button>
+          <span className="text-muted small">
+            Page {currentPage} of {totalPages}
+          </span>
+          <button 
+            className="btn btn-sm btn-outline-secondary" 
+            disabled={currentPage === totalPages}
+            onClick={() => setCurrentPage(prev => prev + 1)}
+          >
+            Next &raquo;
+          </button>
+        </div>
+      )}
     </div>
   );
 }
